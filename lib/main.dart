@@ -1,19 +1,26 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project/features/home/home.dart';
+import 'package:flutter_project/router/router.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const RhymerApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class RhymerApp extends StatefulWidget {
+  const RhymerApp({super.key});
+
+  @override
+  State<RhymerApp> createState() => _RhymerAppState();
+}
+
+class _RhymerAppState extends State<RhymerApp> {
+
+  final _router = AppRouter();
 
   @override
   Widget build(BuildContext context) {
     final primaryColor = Color(0xFFF82B10);
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      title: 'Rhymer',
       //конструктор
       theme: ThemeData(
         primaryColor: primaryColor,
@@ -21,7 +28,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(), //extract widget
+      routerConfig: _router.config(),
     );
   }
 }
