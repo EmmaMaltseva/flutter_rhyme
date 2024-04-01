@@ -34,6 +34,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+//основной виджет
 class _HomeScreenState extends State<HomeScreen> {
 
   var _selectedPageIndex = 0;
@@ -49,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() => _selectedPageIndex = value);
         },
         children: [
-          SearchScreen(),
+          SearchScreen(), //external widget основой экран поиска
           Scaffold(),
           Scaffold(),
           Scaffold()
@@ -59,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: theme.primaryColor,
         unselectedItemColor: theme.hintColor,
         currentIndex: _selectedPageIndex,
-        onTap: _openPage,
+        onTap: _openPage, //функция на изменение значения currentIndex
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Поиск'),
           BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Избранное'),
@@ -71,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _openPage(int index) {
-    setState(() => _selectedPageIndex = index);
+    setState(() => _selectedPageIndex = index); //меняем переменную 
     _pageController.animateToPage(
       index, 
       duration: Duration(microseconds: 300),
@@ -97,7 +98,7 @@ class SearchScreen extends StatelessWidget {
           floating: true,
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(70),
-            child: SearchButton(), //extract widget
+            child: SearchButton(), //extract widget строки поиска
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 16)), //расстояние между апбаром и сливерлистом
@@ -111,20 +112,21 @@ class SearchScreen extends StatelessWidget {
               itemCount: 10,
               separatorBuilder: (context, index) => const SizedBox(width: 16,),
               itemBuilder: (context, index) {
-                final rhymes = List.generate(4, (index) => 'Рифма $index');
-                return RhymeHistoryCard(rhymes: rhymes);},
+                final rhymes = List.generate(4, (index) => 'Рифма $index'); //генерируем список рифм
+                return RhymeHistoryCard(rhymes: rhymes);}, //передаем рифмы в виджет карточки слова с рифмой(истории)
             ),
           )
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 16)),
         SliverList.builder(
-          itemBuilder: (context, index) => const RhymeListCard()
-        ) //extract widget
+          itemBuilder: (context, index) => const RhymeListCard() //extract widget карточка рифма с лайком
+        ) 
       ],
     );
   }
 }
 
+//виджет с карточками историй рифм
 class RhymeHistoryCard extends StatelessWidget {
   const RhymeHistoryCard({
     super.key,
@@ -157,6 +159,7 @@ class RhymeHistoryCard extends StatelessWidget {
   }
 }
 
+//контенер для стилизации карточки истории рифмы и карточки рифмы с лайком
 class BaseContainer extends StatelessWidget {
   const BaseContainer({
     super.key, 
@@ -186,6 +189,7 @@ class BaseContainer extends StatelessWidget {
   }
 }
 
+//виджет с карточками рифмы и лайка
 class RhymeListCard extends StatelessWidget {
   const RhymeListCard({
     super.key,
@@ -215,6 +219,7 @@ class RhymeListCard extends StatelessWidget {
   }
 }
 
+//виджет строки поиска рифмы
 class SearchButton extends StatelessWidget {
   const SearchButton({
     super.key,
