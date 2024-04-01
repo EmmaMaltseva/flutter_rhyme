@@ -15,22 +15,24 @@ class AppRouter extends _$AppRouter {
     AutoRoute(
       page: HomeRoute.page, 
       path: '/',
-    ),
-    AutoRoute(
-      page: SearchRoute.page, 
-      path: '/search',
-    ),
-    AutoRoute(
-      page: HomeRoute.page, 
-      path: '/favorites'
-    ),
-    AutoRoute(
-      page: PoemsRoute.page, 
-      path: '/poems'
-    ),
-    AutoRoute(
-      page: SettingsRoute.page, 
-      path: '/settings'
+      children: [
+        AutoRoute(
+          page: SearchRoute.page, 
+          path: 'search',
+        ),
+        AutoRoute(
+          page: FavoritesRoute.page, 
+          path: 'favorites'
+        ),
+        AutoRoute(
+          page: PoemsRoute.page, 
+          path: 'poems'
+        ),
+        AutoRoute(
+          page: SettingsRoute.page, 
+          path: 'settings'
+        ),
+      ],
     ),
   ];
 }
