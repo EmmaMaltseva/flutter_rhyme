@@ -28,7 +28,7 @@ class HistoryScreen extends StatelessWidget {
               maxCrossAxisExtent: 200.0,
               mainAxisSpacing: 10.0,
               crossAxisSpacing: 10.0,
-              childAspectRatio: 1.7,
+              childAspectRatio: 1.6,
             ),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -38,7 +38,7 @@ class HistoryScreen extends StatelessWidget {
                       rhymes: ['ajssdkj', 'sjhdhfdh', 'hfjhdjf', 'jdnf']),
                 );
               },
-              childCount: 40,
+              childCount: 20,
             ),
           ),
         )

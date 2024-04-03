@@ -28,7 +28,8 @@ class RhymeHistoryCard extends StatelessWidget {
           Flexible(
             child: Text(
               rhymes.map((e) => '$e, ').join(),
-              overflow: TextOverflow.ellipsis,
+              overflow: TextOverflow
+                  .ellipsis, // если контейнер переполнен,то троеточия
             ),
           ),
         ],
