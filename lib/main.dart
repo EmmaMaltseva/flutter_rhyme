@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_project/router/router.dart';
 import 'package:flutter_project/ui/ui.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); //для запуска ассинхронных операций до запуска приложения
+  await dotenv.load(fileName: ".env");
+  final apiUrl = dotenv.env['API_URL'];
   runApp(const RhymerApp());
 }
 
