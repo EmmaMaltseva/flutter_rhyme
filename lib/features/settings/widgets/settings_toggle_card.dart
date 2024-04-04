@@ -19,7 +19,7 @@ class SettingsToggleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 8),
       child: BaseContainer(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
         width: double.infinity,

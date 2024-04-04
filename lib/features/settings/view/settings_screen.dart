@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project/ui/ui.dart';
 
+import '../../../ui/widgets/base_container.dart';
 import '../widgets/widgets.dart';
 
 @RoutePage()
@@ -12,7 +12,6 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -23,7 +22,11 @@ class SettingsScreen extends StatelessWidget {
             snap: true,
             floating: true,
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 16)),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 16,
+            ),
+          ),
           SliverToBoxAdapter(
             child: SettingsToggleCard(
               title: 'Темная тема',
@@ -31,7 +34,6 @@ class SettingsScreen extends StatelessWidget {
               onChanged: (value) {},
             ),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 16)),
           SliverToBoxAdapter(
             child: SettingsToggleCard(
               title: 'Уведомления',
@@ -39,7 +41,6 @@ class SettingsScreen extends StatelessWidget {
               onChanged: (value) {},
             ),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 16)),
           SliverToBoxAdapter(
             child: SettingsToggleCard(
               title: 'Разрешить аналитику',
@@ -47,31 +48,70 @@ class SettingsScreen extends StatelessWidget {
               onChanged: (value) {},
             ),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 24)),
-          const SliverToBoxAdapter(
-              child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: BaseContainer(
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-              width: double.infinity,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Очисить историю',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontSize: 18,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(Icons.delete),
-                  )
-                ],
-              ),
+          const SliverToBoxAdapter(child: SizedBox(height: 16)),
+          SliverToBoxAdapter(
+            child: SettingsActionCard(
+              title: 'Очистить историю',
+              iconData: Icons.delete,
+              iconColor: Theme.of(context).primaryColor,
+              onTap: () {},
             ),
-          )),
+          ),
+          SliverToBoxAdapter(
+            child: SettingsActionCard(
+              title: 'Поддержка',
+              iconData: Icons.message,
+              onTap: () {},
+            ),
+          )
         ],
+      ),
+    );
+  }
+}
+
+class SettingsActionCard extends StatelessWidget {
+  const SettingsActionCard({
+    super.key,
+    required this.title,
+    this.onTap,
+    required this.iconData,
+    this.iconColor,
+  });
+
+  final String title;
+  final VoidCallback? onTap; //реакция на нажатие карточки
+  final IconData iconData;
+  final Color? iconColor;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return GestureDetector(
+      //для реализации логики нажатия
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 8),
+        child: BaseContainer(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+          width: double.infinity,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: theme.textTheme.titleMedium?.copyWith(fontSize: 18),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  iconData,
+                  color: iconColor ?? theme.hintColor.withOpacity(0.3),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
