@@ -47,8 +47,9 @@ class SearchScreen extends StatelessWidget {
         )),
         const SliverToBoxAdapter(child: SizedBox(height: 16)),
         SliverList.builder(
-            itemBuilder: (context, index) =>
-                const RhymeListCard() //extract widget карточка рифма с лайком
+            itemBuilder: (context, index) => const RhymeListCard(
+                  rhyme: 'Рифма',
+                ) //extract widget карточка рифма с лайком
             )
       ],
     );
